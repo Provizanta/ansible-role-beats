@@ -4,7 +4,7 @@
   package:
     name:
       - apt-transport-https
-      - openjdk-8-jre-headless
+      - openjdk-*-jre-headless
     state: present
   tags: install
 
@@ -19,7 +19,6 @@
   lineinfile:
     line: "deb https://artifacts.elastic.co/packages/{{ version | int }}.x/apt stable main"
     path: /etc/apt/sources.list.d/elastic.list
-    mode: preserve
     create: yes
   register: apt_update
   tags: install

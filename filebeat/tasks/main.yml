@@ -38,7 +38,7 @@
     name: filebeat
     enabled: "{{ service['enabled'] }}" 
     state: "{{ 'restarted' if service['state'] == 'started' else service['state'] }}"
-  tags: install
+  tags: [install,configure]
 
 - name: establish configuration 
   template:
