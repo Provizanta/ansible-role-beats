@@ -1,0 +1,6 @@
+---
+
+- name: restart filebeat
+  systemd:
+    name: filebeat
+    state: "{{ 'restarted' if service['state'] == 'started' else service['state'] }}"

@@ -1,7 +1,7 @@
-Filebeat
+ELK Beat
 =========
 
-Install Elastic Stack Beat (filebeat).
+Install Elastic Stack Beat.
 
 Requirements
 ------------
@@ -11,9 +11,11 @@ None
 Role Variables
 --------------
 
+version: <string or int of a version>
+
 configuration: <the entire yaml configuration to be stored in the filebeat configuration file>
 
-filebeat:
+service:
   enabled: <bool, enable the service on startup> 
   state: <enum, state of the systemd service>
 
@@ -31,6 +33,7 @@ Information about local filebeat TCP output port, destination logstash host and 
       roles:
        - role: elk/beats/filebeat
          vars:
+           version: 6
            configuration:
              filebeat:
                inputs:
@@ -49,3 +52,4 @@ Author Information
 ------------------
 
 Tibor Csoka
+
