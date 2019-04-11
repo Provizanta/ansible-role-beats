@@ -1,0 +1,7 @@
+---
+
+- name: restart filebeat
+  service:
+    name: filebeat
+    state: "{{ ((beats['filebeat']['service']['state'] | default('started')) == 'started') |
+      ternary('restarted', beats['filebeat']['service']['state']) }}"

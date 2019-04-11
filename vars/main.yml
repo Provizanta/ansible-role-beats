@@ -1,0 +1,3 @@
+---
+
+filebeat_configuration_validation: "filebeat test config -c %s"

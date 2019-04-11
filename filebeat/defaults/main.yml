@@ -1,7 +1,0 @@
----
-
-version: 6
-
-service:
-  enabled: yes
-  state: started

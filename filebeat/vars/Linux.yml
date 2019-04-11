@@ -1,5 +1,0 @@
----
-
-platform:
-  config_file_path: "/etc/filebeat/filebeat.yml"
-

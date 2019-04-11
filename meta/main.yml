@@ -1,0 +1,29 @@
+---
+
+galaxy_info:
+  role_name: beats
+  author: Tibor Csóka
+  description: |
+    "Establish ELK beats in a specific version along with a specified configuration."
+  company: ""
+
+  license: MIT
+
+  min_ansible_version: 2.7.1
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - cosmic
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+
+  galaxy_tags:
+    - beats
+    - filebeat
+    - elk
+
+dependencies: []

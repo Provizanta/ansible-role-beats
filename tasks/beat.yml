@@ -1,0 +1,31 @@
+---
+
+- name: establish {{ beat_name }} package
+  package:
+    name: "{{ beat_name }}"
+    state: present
+  tags: install
+
+- name: establish {{ beat_name }} configuration
+  template:
+    src: "{{ platform[beat_name]['config_file_path'] | basename }}.j2"
+    dest: "{{ platform[beat_name]['config_file_path'] | default('/etc/%s/%s.yml' | format(beat_name, beat_name)) }}"
+    validate: "{{ lookup('vars', beat_name + '_configuration_validation', errors='ignore') | default(omit) }}"
+  vars:
+    configuration: "{{ beat_attributes['configuration'] }}"
+  notify: restart {{ beat_name }}
+  tags: configure
+
+- name: populate service facts
+  service_facts:
+  tags: always
+
+- name: setup {{ beat_name }} service
+  when:
+    - ansible_service_mgr == 'systemd'
+    - ansible_facts['services'][beat_name] is defined
+  systemd:
+    name: "{{ beat_name }}"
+    enabled: "{{ beat_attributes['service']['enabled'] | default(true) }}"
+    state: "{{ beat_attributes['service']['state'] | default('started') }}"
+  tags: always

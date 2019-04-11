@@ -1,0 +1,37 @@
+---
+
+- name: platform dependent vars
+  when: beats is defined
+  include_vars: "{{ item }}"
+  loop: "{{ query('first_found', params, errors='ignore') }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_system }}.yml"
+      paths:
+        - '{{ role_path }}/vars/platform'
+  tags: always
+
+- name: load platform pre-install tasks
+  when: beats is defined
+  include_tasks: "{{ item }}"
+  loop: "{{ query('first_found', params, errors='ignore') }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_system }}.yml"
+      paths:
+        - '{{ role_path }}/tasks/platform/pre-install/'
+
+- name: establish and configure beats
+  include_tasks: '{{ role_path }}/tasks/beat.yml'
+  vars:
+    beat_name: "{{ item.key }}"
+    beat_attributes: "{{ item.value }}"
+  loop: "{{ (beats | default({})) | dict2items }}"

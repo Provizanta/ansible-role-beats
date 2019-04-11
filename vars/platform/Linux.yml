@@ -1,0 +1,8 @@
+---
+java_packages:
+  - apt-transport-https
+  - default-jdk
+
+platform:
+  filebeat:
+    config_file_path: "/etc/filebeat/filebeat.yml"

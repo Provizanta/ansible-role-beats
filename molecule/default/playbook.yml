@@ -1,0 +1,26 @@
+---
+
+- name: Converge
+  hosts: all
+  roles:
+    - role: beats
+      vars:
+        beats:
+          filebeat:
+            configuration:
+              filebeat.inputs:
+                - type: log
+                  enabled: false
+                  paths:
+                    - /var/log/*.log
+              filebeat.config.modules:
+                path: ${path.config}/modules.d/*.yml
+                reload.enabled: false
+              setup.template.settings:
+                index.number_of_shards: 1
+              setup.kibana:
+              output.elasticsearch:
+                hosts: ["localhost:9200"]
+              processors:
+                - add_host_metadata: ~
+                - add_cloud_metadata: ~

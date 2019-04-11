@@ -1,0 +1,9 @@
+---
+
+java_packages:
+  - apt-transport-https
+  - openjdk-8-jre-headless
+
+platform:
+  filebeat:
+    config_file_path: "/etc/filebeat/filebeat.yml"
