@@ -11,13 +11,13 @@ None
 Role Variables
 --------------
 
-These defaults are set in defaults/main.yml:
+These variables are defined in [defaults/main.yml](./defaults/main.yml):
 
-    version: 6
+    elk_version: 6
 
 Non defaulted variables that can be set:
 
-    beats:
+    elk_beats:
       filebeat:
         configuration: <yaml dict, YAML configuration for filebeat>
         service:
@@ -38,8 +38,8 @@ Information about local filebeat TCP output port, destination logstash host and 
       roles:
        - role: beats
          vars:
-           version: 6
-           beats:
+           elk_version: 6
+           elk_beats:
              filebeat:
                configuration:
                  filebeat:
