@@ -1,12 +1,14 @@
 ---
 
 - name: establish {{ beat_name }} package
+  become: true
   package:
     name: "{{ beat_name }}"
     state: present
   tags: install
 
 - name: establish {{ beat_name }} configuration
+  become: true
   template:
     src: "{{ platform[beat_name]['config_file_path'] | basename }}.j2"
     dest: "{{ platform[beat_name]['config_file_path'] | default('/etc/%s/%s.yml' | format(beat_name, beat_name)) }}"
@@ -17,10 +19,12 @@
   tags: configure
 
 - name: populate service facts
+  become: true
   service_facts:
   tags: always
 
 - name: setup {{ beat_name }} service
+  become: true
   when:
     - ansible_service_mgr == 'systemd'
     - ansible_facts['services'][beat_name] is defined
