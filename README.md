@@ -1,6 +1,8 @@
 Ansible role: beats
 =========
 
+![Build & Deploy](https://github.com/Provizanta/ansible-role-beats/workflows/molecule/badge.svg?branch=master)
+
 Install and configure Elastic (ELK) Stack beats.
 
 Requirements
