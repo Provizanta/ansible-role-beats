@@ -2,6 +2,7 @@
 
 galaxy_info:
   role_name: beats
+  namespace: provizanta
   author: Tibor Csóka
   description: |
     "Establish ELK beats in a specific version along with a specified configuration."
